@@ -1,0 +1,43 @@
+<mat-toolbar>Lista de Activos</mat-toolbar>
+<div class="example-container mat-elevation-z8">
+
+    <router-outlet></router-outlet>
+  
+    <div class="example-header">
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar activo">
+      </mat-form-field>
+    </div>
+    <mat-table [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="datoBigDecimal">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> BIG DECIMAL </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.datoBigDecimal}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="datoDato">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> DATE </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.datoDato}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="datoString">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> STRING </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.datoString}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="acciones">
+        <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <button mat-button color="accent" (click)="eliminar(row.id)">Eliminar</button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+    <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>
